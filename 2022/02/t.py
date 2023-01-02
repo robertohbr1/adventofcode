@@ -1,5 +1,4 @@
 cal = open('input.txt', 'r', encoding='utf-8').read().strip().split('\n')
-# cal = [sum(map(int, i.strip().split('\n'))) for i in cal.split('\n\n')]
 
 soma = 0
 for i in cal:
