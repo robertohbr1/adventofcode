@@ -1,34 +1,21 @@
 import string
 cal = open('input.txt', 'r', encoding='utf-8').read().strip().split('\n')
 
+
+def Calc(txt):
+    global soma
+    soma += string.ascii_letters.index(txt[0]) + 1
+
+
 soma = 0
 for txt in cal:
     x = len(txt) // 2
-    a, b = txt[:x], txt[x:]
-    c = [s for s in a if s in b][0]
-    if c.islower():
-        i = ord(c) - ord('a') + 1
-    else:
-        i = ord(c) - ord('A') + 27
-    soma += i
-    # print(x, a, b, c, i)
-print(soma)
+    Calc([s for s in txt[:x] if s in txt[x:]])
+print("Round 1:", soma)  # 7674
 
 
 soma = 0
 z = 0
-v = ['', '', '']
-for txt in cal:
-    v[z] = txt
-    z += 1
-    if z == 3:
-        z = 0
-        c = ''.join([s for s in v[0] if s in v[1]])
-        c = [s for s in c if s in v[2]][0]
-        if c.islower():
-            i = ord(c) - ord('a') + 1
-        else:
-            i = ord(c) - ord('A') + 27
-        soma += i
-        print(v, c, i)
-print(soma)
+for x in range(0, len(cal), 3):
+    Calc([s for s in cal[x] if s in cal[x + 1] and s in cal[x + 2]])
+print("Round 2:", soma)  # 2805

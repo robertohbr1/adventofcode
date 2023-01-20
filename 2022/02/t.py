@@ -1,48 +1,28 @@
 cal = open('input.txt', 'r', encoding='utf-8').read().strip().split('\n')
 
 soma = 0
-for i in cal:
-    b = i.split(' ')
-    x = (ord(b[1]) - ord('X')) + 1
-    y = 0
-    if b[0] + b[1] in ('AX', 'BY', 'CZ'):
+for txt in cal:
+    b1 = ord(txt[0]) - ord('A')
+    b2 = ord(txt[2]) - ord('X')
+    if b1 == b2:
         y = 3
-    if b[0] + b[1] in ('CX', 'AY', 'BZ'):
+    elif b1 == (b2 + 2) % 3:
         y = 6
-    soma += x + y
+    else:
+        y = 0
+    soma += (b2 + 1) + y
     # print(b, x, y)
-print(soma)
+print('Round 1:', soma)  # 12794
 
 soma = 0
-for i in cal:
-    b = i.split(' ')
-    if b[0] == 'A':
-        if b[1] == 'X':
-            x = 3 + 0
-        elif b[1] == 'Y':
-            x = 1 + 3
-        else:
-            x = 2 + 6
-    elif b[0] == 'B':
-        if b[1] == 'X':
-            x = 1 + 0
-        elif b[1] == 'Y':
-            x = 2 + 3
-        else:
-            x = 3 + 6
-    else:
-        if b[1] == 'X':
-            x = 2 + 0
-        elif b[1] == 'Y':
-            x = 3 + 3
-        else:
-            x = 1 + 6
+for txt in cal:
+    b1 = ord(txt[0]) - ord('A')
+    b2 = ord(txt[2]) - ord('X')
 
-    y = 0
-    # if b[0] + b[1] in ('AX', 'BY', 'CZ'):
-    #     y = 3
-    # if b[0] + b[1] in ('CX', 'AY', 'BZ'):
-    #     y = 6
-    soma += x + y
-    # print(b, x, y)
-print(soma)
+    x = (b1 + b2) % 3
+    if x == 0:
+        x = 3
+
+    soma += x + (b2 * 3)
+
+print('Round 2:', soma)  # 14979
